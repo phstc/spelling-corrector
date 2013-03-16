@@ -7,7 +7,7 @@ describe "SpellingCorrector" do
     SpellingCorrector.any_instance.stub words_collection: File.new(File.expand_path("../fixtures/holmes.txt", __FILE__)).read
   end
 
-  subject(:corrector) { SpellingCorrector.new "oi" }
+  subject(:corrector) { SpellingCorrector.new }
 
   describe "#words" do
     it "converts to downcase and removes any non-word character" do
@@ -25,6 +25,15 @@ describe "SpellingCorrector" do
     end
   end
 
+  describe "#correct" do
+    it "correctos a word" do
+      expect(corrector.correct "cen").to eq "can"
+    end
+  end
+
+  describe "#known_edits2" do
+  end
+
   describe "#train" do
     it "counts how many times each word occurs" do
       expect(corrector.train(%w(oi oi pablo))).to eq ({"oi" => 3, "pablo" => 2})
@@ -33,19 +42,19 @@ describe "SpellingCorrector" do
 
   describe "#deletes" do
     it "returns an array with all possible deletions" do
-      expect(corrector.deletes).to eq %w(i o)
+      expect(corrector.deletes "oi").to eq %w(i o)
     end
   end
 
   describe "#transposes" do
     it "returns an array with all possible transpositions" do
-      expect(corrector.transposes).to eq %w(io)
+      expect(corrector.transposes "oi").to eq %w(io)
     end
   end
 
   describe "#replaces" do
     it "returns an array with all possible replacements with a..z" do
-      expect(corrector.replaces).to eq %w(
+      expect(corrector.replaces "oi").to eq %w(
         ai bi ci di ei fi gi hi ii ji ki li mi
         ni oi pi qi ri si ti ui vi wi xi yi zi
         oa ob oc od oe of og oh oi oj ok ol om
@@ -56,7 +65,7 @@ describe "SpellingCorrector" do
 
   describe "#inserts" do
     it "returns an array with all possible insertions with a..z" do
-      expect(corrector.inserts).to eq %w(
+      expect(corrector.inserts "oi").to eq %w(
         aoi boi coi doi eoi foi goi hoi ioi joi koi loi moi
         noi ooi poi qoi roi soi toi uoi voi woi xoi yoi zoi
         oai obi oci odi oei ofi ogi ohi oii oji oki oli omi
