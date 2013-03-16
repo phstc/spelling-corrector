@@ -31,6 +31,24 @@ describe "SpellingCorrector" do
     end
   end
 
+  describe "#edits1" do
+    it "returns all word transformations" do
+      corrector.stub deletes: %w(a)
+      corrector.stub transposes: %w(b)
+      corrector.stub replaces: %w(c)
+      corrector.stub inserts: %w(d)
+      expect(corrector.edits1 "oi").to eq %w(a b c d)
+    end
+
+    it "returns nil for empty  word transformations" do
+      corrector.stub deletes: []
+      corrector.stub transposes: []
+      corrector.stub replaces: []
+      corrector.stub inserts: []
+      expect(corrector.edits1 "oi").to be_nil
+    end
+  end
+
   describe "#known_edits2" do
   end
 
