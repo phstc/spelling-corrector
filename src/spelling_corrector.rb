@@ -7,7 +7,7 @@ class SpellingCorrector
   end
 
   def correct word
-    (known([word]) or known(edits1(word)) or known_edits2(word) or [word]).max {|a,b| @nwords[a] <=> @nwords[b] }
+    (known([word]) || known(edits1(word)) || known_edits2(word) || [word]).max {|a,b| @nwords[a] <=> @nwords[b] }
   end
 
   # convert to downcase and generate an array containing all words sanitized (\w+)
@@ -21,7 +21,7 @@ class SpellingCorrector
   end
 
   def known words
-    result = words.find_all {|w| @nwords.has_key?(w) }
+    result = words.select {|w| @nwords.has_key?(w) }
     result.empty? ? nil : result
   end
 
