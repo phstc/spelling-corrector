@@ -1,6 +1,4 @@
 require "spec_helper"
-require_relative "../spelling_corrector"
-
 
 describe "SpellingCorrector" do
   subject(:corrector) { SpellingCorrector.new "oi" }
@@ -13,7 +11,7 @@ describe "SpellingCorrector" do
 
   describe "#transposes" do
     it "returns an array with all possible transpositions" do
-      expect(corrector.transposes).to eq %W(io)
+      expect(corrector.transposes).to eq %w(io)
     end
   end
 
