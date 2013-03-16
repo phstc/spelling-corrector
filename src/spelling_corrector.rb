@@ -4,11 +4,22 @@ class SpellingCorrector
 
   def initialize word
     @word   = word
+    train words(nwords)
+  end
+
+  # load a big collection of words (about a million words)
+  def nwords
+    @nwords ||= File.new(File.expand_path("../../holmes.txt", __FILE__)).read
   end
 
   # convert to downcase and generate an array containing all words sanitized (\w+)
   def words text
     text.downcase.scan(/\w+/)
+  end
+
+  def known words
+    result = words.find_all {|w| nwords.has_key?(w) }
+    result.empty? ? nil : result
   end
 
   # count how many times each word occurs

@@ -3,11 +3,21 @@
 require "spec_helper"
 
 describe "SpellingCorrector" do
+  before do
+    SpellingCorrector.any_instance.stub nwords: File.new(File.expand_path("../fixtures/holmes.txt", __FILE__)).read
+  end
+
   subject(:corrector) { SpellingCorrector.new "oi" }
 
   describe "#words" do
     it "converts to downcase and removes any non-word character" do
       expect(corrector.words "OI Óí PaBlO").to eq %w(oi pablo)
+    end
+  end
+
+  describe "#know" do
+    it do
+      expect(corrector.known %w(pablo)).to eq []
     end
   end
 
