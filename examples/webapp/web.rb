@@ -6,3 +6,7 @@ get "/correct/:word" do
   corrector.correct params[:word]
 end
 
+get "/" do
+  redirect "https://github.com/phstc/spelling-corrector"
+end
+
