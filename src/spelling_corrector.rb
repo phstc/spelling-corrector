@@ -1,18 +1,16 @@
+require_relative "spelling_corrector_collection"
+
 # http://norvig.com/spell-correct.html
 class SpellingCorrector
   ALPHABET = ("a".."z").to_a.join
 
-  def initialize
-    @nwords = train words(words_collection)
+  def initialize collection=nil
+    @collection ||= SpellingCorrectorCollection.new
+    @nwords = @collection.nwords
   end
 
   def correct word
     (known([word]) || known(edits1(word)) || known_edits2(word) || [word]).max {|a,b| @nwords[a] <=> @nwords[b] }
-  end
-
-  # convert to downcase and generate an array containing all words sanitized (\w+)
-  def words text
-    text.downcase.scan(/\w+/)
   end
 
   def edits1 word
@@ -29,13 +27,6 @@ class SpellingCorrector
     result = []
     edits1(word).each {|e1| edits1(e1).each {|e2| result << e2 if @nwords.has_key?(e2) }}
     result.empty? ? nil : result
-  end
-
-  # count how many times each word occurs
-  def train features
-    model = Hash.new 1
-    features.each {|f| model[f] += 1 }
-    model
   end
 
   # remove one letter
@@ -63,11 +54,5 @@ class SpellingCorrector
     insertions
   end
 
-  private
-
-  # load a big collection of known words (about a million words)
-  def words_collection
-    @words_collection ||= File.new(File.expand_path("../../holmes.txt", __FILE__)).read
-  end
 end
 

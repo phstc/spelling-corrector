@@ -2,18 +2,13 @@
 
 require "spec_helper"
 
-describe "SpellingCorrector" do
+describe SpellingCorrector do
+
   before do
-    SpellingCorrector.any_instance.stub words_collection: File.new(File.expand_path("../fixtures/holmes.txt", __FILE__)).read
+    SpellingCorrectorCollection.any_instance.stub words_collection: File.new(File.expand_path("../fixtures/holmes.txt", __FILE__)).read
   end
 
   subject(:corrector) { SpellingCorrector.new }
-
-  describe "#words" do
-    it "converts to downcase and removes any non-word character" do
-      expect(corrector.words "OI Óí PaBlO").to eq %w(oi pablo)
-    end
-  end
 
   describe "#known" do
     it "returns known words" do
@@ -50,12 +45,6 @@ describe "SpellingCorrector" do
   end
 
   describe "#known_edits2" do
-  end
-
-  describe "#train" do
-    it "counts how many times each word occurs" do
-      expect(corrector.train(%w(oi oi pablo))).to eq ({"oi" => 3, "pablo" => 2})
-    end
   end
 
   describe "#deletes" do
