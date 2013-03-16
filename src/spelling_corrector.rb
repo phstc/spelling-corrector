@@ -40,13 +40,13 @@ class SpellingCorrector
 
   # remove one letter
   def deletes word
-    (0...word.length).collect {|i| word[0...i] + word[i+1..-1] }
+    (0...word.length).map {|i| word[0...i] + word[i+1..-1] }
   end
 
 
   # swap adjacent letters
   def transposes word
-    (0...word.length-1).collect {|i| word[0...i] + word[i+1,1] + word[i,1] + word[i+2..-1] }
+    (0...word.length-1).map {|i| word[0...i] + word[i+1,1] + word[i,1] + word[i+2..-1] }
   end
 
   # change one letter to another
