@@ -1,7 +1,21 @@
+# encoding: utf-8
+
 require "spec_helper"
 
 describe "SpellingCorrector" do
   subject(:corrector) { SpellingCorrector.new "oi" }
+
+  describe "#words" do
+    it "converts to downcase and removes any non-word character" do
+      expect(corrector.words "OI Óí PaBlO").to eq %w(oi pablo)
+    end
+  end
+
+  describe "#train" do
+    it "counts how many times each word occurs" do
+      expect(corrector.train(%w(oi oi pablo))).to eq ({"oi" => 3, "pablo" => 2})
+    end
+  end
 
   describe "#deletes" do
     it "returns an array with all possible deletions" do
