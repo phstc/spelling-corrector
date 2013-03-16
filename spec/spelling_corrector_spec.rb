@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "SpellingCorrector" do
   before do
-    SpellingCorrector.any_instance.stub nwords: File.new(File.expand_path("../fixtures/holmes.txt", __FILE__)).read
+    SpellingCorrector.any_instance.stub words_collection: File.new(File.expand_path("../fixtures/holmes.txt", __FILE__)).read
   end
 
   subject(:corrector) { SpellingCorrector.new "oi" }
@@ -15,9 +15,13 @@ describe "SpellingCorrector" do
     end
   end
 
-  describe "#know" do
-    it do
-      expect(corrector.known %w(pablo)).to eq []
+  describe "#known" do
+    it "returns known words" do
+      expect(corrector.known %w(can)).to eq %w(can)
+    end
+
+    it "returns nil for unknown words" do
+      expect(corrector.known %w(pablo)).to be_nil
     end
   end
 

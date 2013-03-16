@@ -4,12 +4,7 @@ class SpellingCorrector
 
   def initialize word
     @word   = word
-    train words(nwords)
-  end
-
-  # load a big collection of words (about a million words)
-  def nwords
-    @nwords ||= File.new(File.expand_path("../../holmes.txt", __FILE__)).read
+    @nwords = train words(words_collection)
   end
 
   # convert to downcase and generate an array containing all words sanitized (\w+)
@@ -18,7 +13,7 @@ class SpellingCorrector
   end
 
   def known words
-    result = words.find_all {|w| nwords.has_key?(w) }
+    result = words.find_all {|w| @nwords.has_key?(w) }
     result.empty? ? nil : result
   end
 
@@ -56,6 +51,13 @@ class SpellingCorrector
 
   def length
     @word.length
+  end
+
+  private
+
+  # load a big collection of known words (about a million words)
+  def words_collection
+    @words_collection ||= File.new(File.expand_path("../../holmes.txt", __FILE__)).read
   end
 end
 
