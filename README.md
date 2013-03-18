@@ -36,7 +36,7 @@ In the `examples` directory, there are two examples, one using refinements and a
 
 The API is deployed at Heroku, you can easily test it via `curl` or directly in the browser (shame on you).
 
-```shell
+```bash
 curl spelling-corrector.herokuapp.com/correct/cen
 => can
 ```
