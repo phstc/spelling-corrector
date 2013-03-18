@@ -18,6 +18,8 @@ require "spelling_corrector"
 
 corrector = SpellingCorrector.new
 corrector.correct "cen" => "can"
+
+corrector.correct "unknownword" => "NO SUGGESTION"
 ```
 
 ### Refinements
