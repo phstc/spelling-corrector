@@ -41,6 +41,23 @@ curl spelling-corrector.herokuapp.com/correct/cen
 => can
 ```
 
+## SpellingCorrectorCollection
+
+I separated the concern (SRP) of correcting words in the `SpellingCorrector` and the reading and training the words collection in the `SpellingCorrectorCollection`.
+
+You can easily substitute the word collection when instantiate a new SpellingCorrector.
+
+```ruby
+SpellingCorrector.new my_word_collection
+
+# The default word collection is SpellingCorrectorCollection
+# class SpellingCorrector
+#   def initialize collection=nil
+#     @collection ||= SpellingCorrectorCollection.new
+```
+
+A NoSQL words collection could be a good option to avoid reading a big file and training the words all times.
+
 ## License
 This code is licensed under:
 
