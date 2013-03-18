@@ -1,18 +1,14 @@
-if RUBY_VERSION.to_i == 2
+require_relative "spelling_corrector"
 
-  require_relative "spelling_corrector"
+# using StringSpellingCorrectorRefinement
+# "cen".correct => "can"
 
-  module StringSpellingCorrectorRefinement
-    refine String do
-      def correct
-        @corrector ||= SpellingCorrector.new
-        @corrector.correct self
-      end
+module StringSpellingCorrectorRefinement
+  refine String do
+    def correct
+      @corrector ||= SpellingCorrector.new
+      @corrector.correct self
     end
   end
-
-  # Example
-  # using StringSpellingCorrectorRefinement
-  # "cen".correct => "can"
 end
 
