@@ -25,8 +25,23 @@ describe SpellingCorrector do
       expect(corrector.correct "cen").to eq "can"
     end
 
-    it "says no suggestion for unknown words" do
+    it "returns NO SUGGESTION for unknown words" do
       expect(corrector.correct "pablo").to eq "NO SUGGESTION"
+    end
+
+    it "removes three or more occurrences of the same characters" do
+      expect(corrector.correct "jjoobbb").to eq "job"
+    end
+
+    context "sample words" do
+      words_hash =
+        {"sheeeeep" => "sheep", "peepple" => "people", "inSIDE" => "inside", "jjoobbb" => "job", "weke" => "wake"}
+
+      words_hash.keys.each do |incorrect_word|
+        it "corrects #{incorrect_word} to #{words_hash[incorrect_word]}" do
+          expect(corrector.correct incorrect_word).to eq words_hash[incorrect_word]
+        end
+      end
     end
   end
 

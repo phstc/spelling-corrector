@@ -10,6 +10,7 @@ class SpellingCorrector
   end
 
   def correct word
+    word = word.downcase.squeeze
     (known([word]) || known(edits1(word)) || known_edits2(word) || ["NO SUGGESTION"]).max {|a,b| @nwords[a] <=> @nwords[b] }
   end
 
