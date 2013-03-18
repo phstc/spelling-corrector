@@ -10,7 +10,7 @@ class SpellingCorrector
   end
 
   def correct word
-    (known([word]) || known(edits1(word)) || known_edits2(word) || [word]).max {|a,b| @nwords[a] <=> @nwords[b] }
+    (known([word]) || known(edits1(word)) || known_edits2(word) || ["NO SUGGESTION"]).max {|a,b| @nwords[a] <=> @nwords[b] }
   end
 
   def edits1 word

@@ -24,6 +24,10 @@ describe SpellingCorrector do
     it "correctos a word" do
       expect(corrector.correct "cen").to eq "can"
     end
+
+    it "says no suggestion for unknown words" do
+      expect(corrector.correct "pablo").to eq "NO SUGGESTION"
+    end
   end
 
   describe "#edits1" do
