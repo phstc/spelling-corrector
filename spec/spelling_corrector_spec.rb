@@ -5,7 +5,7 @@ require "spec_helper"
 describe SpellingCorrector do
 
   before do
-    SpellingCorrectorCollection.any_instance.stub words_collection: File.new(File.expand_path("../fixtures/holmes.txt", __FILE__)).read
+    WordCollection.any_instance.stub untrained_collection_text: File.new(File.expand_path("../fixtures/holmes.txt", __FILE__)).read
   end
 
   subject(:corrector) { SpellingCorrector.new }
@@ -57,9 +57,6 @@ describe SpellingCorrector do
       corrector.stub inserts: []
       expect(corrector.edits1 "oi").to be_nil
     end
-  end
-
-  describe "#known_edits2" do
   end
 
   describe "#deletes" do

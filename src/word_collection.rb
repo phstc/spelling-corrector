@@ -1,13 +1,13 @@
-class SpellingCorrectorCollection
+class WordCollection
   attr_reader :nwords
 
   def initialize
-    @nwords = train words(words_collection)
+    @nwords = train words untrained_collection_text
   end
 
   # convert to downcase and generate an array containing all words sanitized (\w+)
   def words text
-    text.downcase.scan(/\w+/)
+    text.downcase.scan /\w+/
   end
 
   # count how many times each word occurs
@@ -20,7 +20,8 @@ class SpellingCorrectorCollection
   private
 
   # load a big collection of known words (about a million words)
-  def words_collection
-    @words_collection ||= File.new(File.expand_path("../../holmes.txt", __FILE__)).read
+  def untrained_collection_text
+    File.new(File.expand_path("../../holmes.txt", __FILE__)).read
   end
 end
+

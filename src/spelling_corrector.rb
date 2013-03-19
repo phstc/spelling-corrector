@@ -1,12 +1,11 @@
-require_relative "spelling_corrector_collection"
+require_relative "word_collection"
 
 # http://norvig.com/spell-correct.html
 class SpellingCorrector
   ALPHABET = ("a".."z").to_a.join
 
-  def initialize collection=nil
-    @collection ||= collection || SpellingCorrectorCollection.new
-    @nwords = @collection.nwords
+  def initialize collection=WordCollection.new
+    @nwords = collection.nwords
   end
 
   def correct word
@@ -54,6 +53,5 @@ class SpellingCorrector
     word.length.times {|i| ALPHABET.each_byte {|l| insertions << word[0...i] + l.chr + word[i..-1] } }
     insertions
   end
-
 end
 
