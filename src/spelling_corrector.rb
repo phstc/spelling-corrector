@@ -5,7 +5,7 @@ class SpellingCorrector
   ALPHABET = ("a".."z").to_a.join
 
   def initialize collection=nil
-    @collection ||= SpellingCorrectorCollection.new
+    @collection ||= collection || SpellingCorrectorCollection.new
     @nwords = @collection.nwords
   end
 

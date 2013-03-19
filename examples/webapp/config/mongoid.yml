@@ -1,0 +1,6 @@
+development:
+  sessions:
+    default:
+      database: spelling_corrector
+      hosts:
+        - localhost:27017
