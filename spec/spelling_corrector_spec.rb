@@ -29,13 +29,9 @@ describe SpellingCorrector do
       expect(corrector.correct "pablo").to eq "NO SUGGESTION"
     end
 
-    it "removes three or more occurrences of the same characters" do
-      expect(corrector.correct "jjoobbb").to eq "job"
-    end
-
     context "sample words" do
       words_hash =
-        {"sheeeeep" => "sheep", "peepple" => "people", "inSIDE" => "inside", "jjoobbb" => "job", "weke" => "wake"}
+        {"sheeep" => "sheep", "peepple" => "people", "inSIDE" => "inside", "joob" => "job", "weke" => "wake"}
 
       words_hash.keys.each do |incorrect_word|
         it "corrects #{incorrect_word} to #{words_hash[incorrect_word]}" do
