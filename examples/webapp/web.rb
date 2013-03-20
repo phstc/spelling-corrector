@@ -2,7 +2,7 @@ require "sinatra"
 require "mongoid"
 require_relative "../../src/persisted_spelling_corrector"
 
-Mongoid.load! File.expand_path("../config/mongoid.yml", __FILE__)
+Mongoid.load! File.expand_path("../config/mongoid.yml", __FILE__), ENV["RACK_ENV"]
 
 get "/correct/:word" do
   PersistedSpellingCorrector.new.correct params[:word]
