@@ -5,7 +5,6 @@ class PersistedWordCollection
   include Mongoid::Document
   field :word, type: String
   field :rank, type: Integer
-  store_in collection: "word_collections"
 
   def nwords
     persisted_collection = PersistedWordCollection.all
@@ -24,10 +23,9 @@ class PersistedWordCollection
 
   def load_word_collection
     word_collection = WordCollection.new
-    hash_collection = word_collection.nwords.map do |word_arr|
-      {word: word_arr[0], rank: word_arr[1]}
+    word_collection.nwords.each do |word_arr|
+      PersistedWordCollection.create({word: word_arr[0], rank: word_arr[1]})
     end
-    PersistedWordCollection.create(hash_collection)
     word_collection.nwords
   end
 end

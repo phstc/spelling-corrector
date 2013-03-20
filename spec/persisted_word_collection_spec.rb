@@ -25,12 +25,12 @@ describe PersistedWordCollection do
       end
 
       it "persists data" do
-        PersistedWordCollection.should_receive(:create).with([{word: "job", rank: 1}])
+        PersistedWordCollection.should_receive(:create).with({word: "job", rank: 1})
         persisted_word_collection.nwords
       end
 
       it "returns nwords" do
-        PersistedWordCollection.stub(:create).with([{word: "job", rank: 1}])
+        PersistedWordCollection.stub(:create).with({word: "job", rank: 1})
         expect(persisted_word_collection.nwords).to eq nwords
       end
     end
