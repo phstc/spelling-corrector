@@ -13,12 +13,15 @@ class PersistedSpellingCorrector
   end
 
   def correct word
-    correction = PersistedSpellingCorrector.where(word: word).first
-    unless correction
-      correction = @corrector.correct word
+    # persisted_word = PersistedSpellingCorrector.where(word: word).first
+    # if persisted_word
+      # correction = persisted_word.correction
+    # else
+      # correction = @corrector.correct word
       # PersistedSpellingCorrector.create(word: word, correction: correction)
-    end
-    correction
+    # end
+    # correction
+    @corrector.correct word
   end
 end
 
