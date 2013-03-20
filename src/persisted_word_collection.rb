@@ -5,6 +5,7 @@ class PersistedWordCollection
   include Mongoid::Document
   field :word, type: String
   field :rank, type: Integer
+  store_in collection: "word_collections"
 
   def nwords
     persisted_collection = PersistedWordCollection.all
