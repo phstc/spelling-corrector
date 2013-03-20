@@ -16,7 +16,7 @@ class PersistedSpellingCorrector
     correction = PersistedSpellingCorrector.where(word: word).first
     unless correction
       correction = @corrector.correct word
-      PersistedSpellingCorrector.create(word: word, correction: correction)
+      # PersistedSpellingCorrector.create(word: word, correction: correction)
     end
     correction
   end
