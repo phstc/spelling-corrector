@@ -4,7 +4,7 @@ require_relative "word_collection"
 class SpellingCorrector
   ALPHABET = ("a".."z").to_a.join
 
-  EXECEPTIONS = %w(sheeple)
+  EXCEPTIONS = %w(sheeple)
 
   def initialize collection=WordCollection.new
     @nwords = collection.nwords
@@ -12,7 +12,7 @@ class SpellingCorrector
 
   def correct word
     word = squeeze word.downcase
-    return "NO SUGGESTION" if EXECEPTIONS.include? word
+    return "NO SUGGESTION" if EXCEPTIONS.include? word
     (known([word]) || known(edits1(word)) || known_edits2(word) || levenshtein(word) || ["NO SUGGESTION"]).
       max {|a,b| @nwords[a] <=> @nwords[b] }
   end
