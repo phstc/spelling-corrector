@@ -29,7 +29,7 @@ corrector.correct "unknownword" => "NO SUGGESTION"
 
 ### Persisted Spelling Corrector
 
-The `PersistedSpellingCorrector` and `PersistedWordCollection` are implementions using MongoDB (encapsulating the non-persisted implementations) to persisted the correction and trained word collection.
+The `PersistedSpellingCorrector` and `PersistedWordCollection` are implementions using MongoDB (encapsulating the non-persisted implementations) to persisted the corrections and trained word collection.
 
 
 ## Examples
