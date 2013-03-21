@@ -5,7 +5,7 @@ require "spec_helper"
 describe SpellingCorrector do
 
   before do
-    WordCollection.any_instance.stub untrained_collection_text: File.new(File.expand_path("../fixtures/holmes.txt", __FILE__)).read
+    # WordCollection.any_instance.stub untrained_collection_text: File.new(File.expand_path("../fixtures/holmes.txt", __FILE__)).read
   end
 
   subject(:corrector) { SpellingCorrector.new }
@@ -16,7 +16,7 @@ describe SpellingCorrector do
     end
 
     it "returns nil for unknown words" do
-      expect(corrector.known %w(pablo)).to be_nil
+      expect(corrector.known %w("ornithorhyncus")).to be_nil
     end
   end
 
@@ -26,12 +26,22 @@ describe SpellingCorrector do
     end
 
     it "returns NO SUGGESTION for unknown words" do
-      expect(corrector.correct "pablo").to eq "NO SUGGESTION"
+      expect(corrector.correct "ornithorhyncus").to eq "NO SUGGESTION"
     end
 
     context "sample words" do
-      words_hash =
-        {"sheeep" => "sheep", "peepple" => "people", "inSIDE" => "inside", "joob" => "job", "weke" => "wake"}
+      # words_hash =
+        # {"sheeep" => "sheep", "peepple" => "people", "inSIDE" => "inside", "joob" => "job", "weke" => "wake"}
+
+      words_hash = {
+        "sheeeeep"    => "sheep",
+        "peepple"     => "people",
+        "sheeple"     => "NO SUGGESTION",
+        "inSIDE"      => "inside",
+        "jjoobbb"     => "job",
+        "weke"        => "wake",
+        "CUNsperrICY" => "conspiracy"
+      }
 
       words_hash.keys.each do |incorrect_word|
         it "corrects #{incorrect_word} to #{words_hash[incorrect_word]}" do

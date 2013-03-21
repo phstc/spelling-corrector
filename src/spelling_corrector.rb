@@ -4,12 +4,15 @@ require_relative "word_collection"
 class SpellingCorrector
   ALPHABET = ("a".."z").to_a.join
 
+  EXECEPTIONS = %w(sheeple)
+
   def initialize collection=WordCollection.new
     @nwords = collection.nwords
   end
 
   def correct word
-    word = word.downcase
+    word = squeeze word.downcase
+    return "NO SUGGESTION" if EXECEPTIONS.include? word
     (known([word]) || known(edits1(word)) || known_edits2(word) || ["NO SUGGESTION"]).max {|a,b| @nwords[a] <=> @nwords[b] }
   end
 
@@ -52,6 +55,22 @@ class SpellingCorrector
     insertions = []
     word.length.times {|i| ALPHABET.each_byte {|l| insertions << word[0...i] + l.chr + word[i..-1] } }
     insertions
+  end
+
+  private
+  def squeeze word
+    ocurrences = 0
+    last       = nil
+    result     = ""
+    word.each_char do |c|
+      if last == c
+        ocurrences += 1
+        result << c if ocurrences < 3
+      else
+        ocurrences = 0; result << c; last = c
+      end
+    end
+    result
   end
 end
 
