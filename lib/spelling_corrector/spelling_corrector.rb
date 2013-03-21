@@ -2,7 +2,7 @@
 class SpellingCorrector
   ALPHABET = ("a".."z").to_a.join
 
-  EXCEPTIONS = %w(sheeple)
+  EXCEPTIONS = %w(sheeple sheeeple)
 
   def initialize collection=WordCollection.new
     @nwords = collection.nwords
