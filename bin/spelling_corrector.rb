@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative "../src/spelling_corrector"
+require_relative "../lib/spelling_corrector"
 
 corrector = SpellingCorrector.new
 

@@ -21,7 +21,7 @@ class WordCollection
 
   # load a big collection of known words (about a million words)
   def untrained_collection_text
-    File.new(File.expand_path("../../holmes.txt", __FILE__)).read
+    File.new(File.expand_path("../../../holmes.txt", __FILE__)).read
   end
 end
 

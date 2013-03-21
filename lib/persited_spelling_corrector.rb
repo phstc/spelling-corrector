@@ -1,0 +1,4 @@
+require "mongoid"
+require_relative "spelling_corrector"
+require_relative "spelling_corrector/persisted_spelling_corrector"
+require_relative "spelling_corrector/persisted_word_collection"

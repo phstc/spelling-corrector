@@ -1,7 +1,3 @@
-require "mongoid"
-require_relative "spelling_corrector"
-require_relative "persisted_word_collection"
-
 class PersistedSpellingCorrector
   include Mongoid::Document
   field :word, type: String

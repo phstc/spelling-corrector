@@ -1,6 +1,3 @@
-require "mongoid"
-require_relative "word_collection"
-
 class PersistedWordCollection
   include Mongoid::Document
   field :word, type: String

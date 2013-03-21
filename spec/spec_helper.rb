@@ -1,3 +1,3 @@
-# Requires all source files
-Dir[File.expand_path("../../src/**/*.rb", __FILE__)].each { |f| require f }
+require_relative "../lib/spelling_corrector"
+require_relative "../lib/persited_spelling_corrector"
 

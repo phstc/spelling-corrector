@@ -1,5 +1,3 @@
-require_relative "word_collection"
-
 # http://norvig.com/spell-correct.html
 class SpellingCorrector
   ALPHABET = ("a".."z").to_a.join

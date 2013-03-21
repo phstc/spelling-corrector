@@ -1,7 +1,4 @@
-require_relative "spelling_corrector"
-
-# using StringSpellingCorrectorRefinement
-# "cen".correct => "can"
+require_relative "../lib/spelling_corrector"
 
 module StringSpellingCorrectorRefinement
   refine String do
@@ -11,4 +8,8 @@ module StringSpellingCorrectorRefinement
     end
   end
 end
+
+using StringSpellingCorrectorRefinement
+
+puts "cen".correct
 
