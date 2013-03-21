@@ -13,7 +13,7 @@ class SpellingCorrector
   def correct word
     word = squeeze word.downcase
     return "NO SUGGESTION" if EXECEPTIONS.include? word
-    (known([word]) || known(edits1(word)) || known_edits2(word) || ["NO SUGGESTION"]).max {|a,b| @nwords[a] <=> @nwords[b] }
+    (known([word]) || known(edits1(word)) || known_edits2(word) || levenshtein(word) || ["NO SUGGESTION"]).max {|a,b| @nwords[a] <=> @nwords[b] }
   end
 
   def edits1 word
@@ -31,6 +31,14 @@ class SpellingCorrector
     edits1(word).each {|e1| edits1(e1).each {|e2| result << e2 if @nwords.has_key?(e2) }}
     result.empty? ? nil : result
   end
+
+  def levenshtein word
+    @nwords.each_key do |other|
+      return [other] if Levenshtein.distance(word, other) <= 6
+    end
+    nil
+  end
+
 
   # remove one letter
   def deletes word
@@ -58,6 +66,7 @@ class SpellingCorrector
   end
 
   private
+
   def squeeze word
     ocurrences = 0
     last       = nil
@@ -65,12 +74,48 @@ class SpellingCorrector
     word.each_char do |c|
       if last == c
         ocurrences += 1
-        result << c if ocurrences < 3
+        result << c if ocurrences < 2
       else
         ocurrences = 0; result << c; last = c
       end
     end
     result
+  end
+end
+
+class Levenshtein
+  # http://www.informit.com/articles/article.aspx?p=683059&seqNum=36
+  def self.distance(word, other, ins=2, del=2, sub=1)
+    # ins, del, sub are weighted costs
+    return nil if word.nil?
+    return nil if other.nil?
+    dm = []        # distance matrix
+
+    # Initialize first row values
+    dm[0] = (0..word.length).collect { |i| i * ins }
+    fill = [0] * (word.length - 1)
+
+    # Initialize first column values
+    for i in 1..other.length
+      dm[i] = [i * del, fill.flatten]
+    end
+
+    # populate matrix
+    for i in 1..other.length
+      for j in 1..word.length
+        # critical comparison
+        dm[i][j] = [
+          dm[i-1][j-1] +
+          (word[j-1] == other[i-1] ? 0 : sub),
+          dm[i][j-1] + ins,
+          dm[i-1][j] + del
+        ].min
+      end
+    end
+
+    # The last value in matrix is the
+    # Levenshtein distance between the strings
+    dm[other.length][word.length]
   end
 end
 

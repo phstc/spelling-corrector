@@ -21,7 +21,7 @@ describe SpellingCorrector do
   end
 
   describe "#correct" do
-    it "correctos a word" do
+    it "corrects a word" do
       expect(corrector.correct "cen").to eq "can"
     end
 
@@ -31,7 +31,7 @@ describe SpellingCorrector do
 
     context "sample words" do
       # words_hash =
-        # {"sheeep" => "sheep", "peepple" => "people", "inSIDE" => "inside", "joob" => "job", "weke" => "wake"}
+      # {"sheeep" => "sheep", "peepple" => "people", "inSIDE" => "inside", "joob" => "job", "weke" => "wake"}
 
       words_hash = {
         "sheeeeep"    => "sheep",
