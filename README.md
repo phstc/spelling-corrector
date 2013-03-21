@@ -2,7 +2,7 @@
 
 It's a Ruby implementation of [Norvig Spelling Corrector](http://norvig.com/spell-correct.html) plus [Levenshtein distance](http://en.wikipedia.org/wiki/Levenshtein_distance) fallback.
 
-If Norvig algorithm doesn't find the correction, this implementation will look for the first occurrence (distance < 7) of a similar word using Levenshtein distance.
+If Norvig algorithm doesn't find the correction, this implementation will look for the first occurrence (distance <= 8) of a similar word using Levenshtein distance.
 
 ```ruby
 known([word]) || known(edits1(word)) || known_edits2(word) || levenshtein(word) || ["NO SUGGESTION"]

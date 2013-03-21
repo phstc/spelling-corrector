@@ -33,7 +33,7 @@ class SpellingCorrector
 
   def levenshtein word
     @nwords.each_key do |other|
-      return [other] if Levenshtein.distance(word, other) <= 6
+      return [other] if Levenshtein.distance(word, other) <= 8
     end
     nil
   end
