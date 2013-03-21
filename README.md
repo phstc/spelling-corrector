@@ -2,8 +2,6 @@
 
 It's a Ruby implementation of [Norvig Spelling Corrector](http://norvig.com/spell-correct.html).
 
-This implementation is a shameless copy of Norvig Python version in Ruby, with minor changes in the sintax and personal preferences.
-
 ## The Algorithm
 
 Firstly, I recommend to read the [Norvig explanation](http://norvig.com/spell-correct.html) then have a look at `spec/spelling_corrector_spec.rb`, the tests show how each method work, it helps a lot the understading of the algorithm.
