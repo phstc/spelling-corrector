@@ -7,7 +7,7 @@ corrector = SpellingCorrector.new
 ARGV.each do |word|
   correction = corrector.correct word
 
-  fail "NO SUGGESTION" if correction == "NO SUGGESTION"
+  fail "NO SUGGESTION for #{word}" if correction == "NO SUGGESTION"
 end
 
 puts "SUCCESS"

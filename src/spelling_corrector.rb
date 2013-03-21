@@ -13,7 +13,8 @@ class SpellingCorrector
   def correct word
     word = squeeze word.downcase
     return "NO SUGGESTION" if EXECEPTIONS.include? word
-    (known([word]) || known(edits1(word)) || known_edits2(word) || levenshtein(word) || ["NO SUGGESTION"]).max {|a,b| @nwords[a] <=> @nwords[b] }
+    (known([word]) || known(edits1(word)) || known_edits2(word) || levenshtein(word) || ["NO SUGGESTION"]).
+      max {|a,b| @nwords[a] <=> @nwords[b] }
   end
 
   def edits1 word
