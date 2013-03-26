@@ -4,7 +4,7 @@ describe SpellingCorrector do
 
   before do
     # WordCollection.any_instance.stub untrained_collection_text: File.new(File.expand_path("../fixtures/data/holmes.txt", __FILE__)).read
-    LevenshteinWordCollection.stub nwords: %w(job conspiracy)
+    LevenshteinWordCollection.any_instance.stub nwords: %w(job conspiracy)
   end
 
   subject(:corrector) { SpellingCorrector.new }

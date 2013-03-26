@@ -29,7 +29,7 @@ class SpellingCorrector
   end
 
   def levenshtein word
-    @nwords = LevenshteinWordCollection.nwords
+    @nwords = LevenshteinWordCollection.new.nwords
     result = min = nil
     @nwords.each do |other|
       return [other] if (distance = Levenshtein.distance word, other) == 1
