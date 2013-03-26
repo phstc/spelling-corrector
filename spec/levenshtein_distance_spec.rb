@@ -10,7 +10,8 @@ describe Levenshtein do
         OpenStruct.new(word: "inSIDE"      , other: "inside"     , distance: 4),
         OpenStruct.new(word: "jjoobbb"     , other: "job"        , distance: 8),
         OpenStruct.new(word: "weke"        , other: "wake"       , distance: 1),
-        OpenStruct.new(word: "CUNsperrICY" , other: "conspiracy" , distance: 9)
+        OpenStruct.new(word: "CUNsperrICY" , other: "conspiracy" , distance: 9),
+        OpenStruct.new(word: "CUNsperrICY" , other: "conspersion" , distance: 7)
       ]
 
       sample_words.each do |sample|
