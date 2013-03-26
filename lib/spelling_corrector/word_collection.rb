@@ -1,8 +1,8 @@
 class WordCollection
   attr_reader :nwords
 
-  def initialize
-    @nwords = train words untrained_collection_text
+  def nwords
+    @nwords ||= train words untrained_collection_text
   end
 
   # convert to downcase and generate an array containing all words sanitized (\w+)
@@ -21,7 +21,7 @@ class WordCollection
 
   # load a big collection of known words (about a million words)
   def untrained_collection_text
-    File.new(File.expand_path("../../../holmes.txt", __FILE__)).read
+    File.new(File.expand_path("../../../data/holmes.txt", __FILE__)).read
   end
 end
 

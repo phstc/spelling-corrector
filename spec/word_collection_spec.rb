@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe WordCollection do
   before do
-    WordCollection.any_instance.stub untrained_collection_text: File.new(File.expand_path("../fixtures/holmes.txt", __FILE__)).read
+    WordCollection.stub untrained_collection_text: File.new(File.expand_path("../fixtures/data/holmes.txt", __FILE__)).read
   end
 
   subject(:word_collection) { WordCollection.new }

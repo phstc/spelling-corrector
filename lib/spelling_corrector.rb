@@ -1,4 +1,5 @@
 require_relative "spelling_corrector/spelling_corrector"
 require_relative "spelling_corrector/word_collection"
 require_relative "spelling_corrector/levenshtein_distance"
+require_relative "spelling_corrector/levenshtein_word_collection"
 

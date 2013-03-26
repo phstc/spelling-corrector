@@ -4,6 +4,12 @@ class PersistedWordCollection
   field :rank, type: Integer
 
   def nwords
+    @nwords ||= load_nwords
+  end
+
+  private
+
+  def load_nwords
     persisted_collection = PersistedWordCollection.all
     if persisted_collection.any?
       persisted_collection_arr = {}
@@ -15,8 +21,6 @@ class PersistedWordCollection
       load_word_collection
     end
   end
-
-  private
 
   def load_word_collection
     word_collection = WordCollection.new

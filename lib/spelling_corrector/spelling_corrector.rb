@@ -2,15 +2,12 @@
 class SpellingCorrector
   ALPHABET = ("a".."z").to_a.join
 
-  EXCEPTIONS = %w(sheeple sheeeple)
-
   def initialize collection=WordCollection.new
     @nwords = collection.nwords
   end
 
   def correct word
     word = squeeze word.downcase
-    return "NO SUGGESTION" if EXCEPTIONS.include? word
     (known([word]) || known(edits1(word)) || known_edits2(word) || levenshtein(word) || ["NO SUGGESTION"]).
       max {|a,b| @nwords[a] <=> @nwords[b] }
   end
@@ -32,18 +29,21 @@ class SpellingCorrector
   end
 
   def levenshtein word
-    @nwords.each_key do |other|
-      return [other] if Levenshtein.distance(word, other) <= 8
+    @nwords = LevenshteinWordCollection.nwords
+    result = min = nil
+    @nwords.each do |other|
+      return [other] if (distance = Levenshtein.distance word, other) == 1
+      if (distance < 15 && (min.nil? || distance < min))
+        min = distance; result = [other]
+      end
     end
-    nil
+    result
   end
-
 
   # remove one letter
   def deletes word
     (0...word.length).map {|i| word[0...i] + word[i+1..-1] }
   end
-
 
   # swap adjacent letters
   def transposes word

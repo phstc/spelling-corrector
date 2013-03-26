@@ -3,7 +3,8 @@ require "spec_helper"
 describe SpellingCorrector do
 
   before do
-    # WordCollection.any_instance.stub untrained_collection_text: File.new(File.expand_path("../fixtures/holmes.txt", __FILE__)).read
+    # WordCollection.any_instance.stub untrained_collection_text: File.new(File.expand_path("../fixtures/data/holmes.txt", __FILE__)).read
+    LevenshteinWordCollection.stub nwords: %w(job conspiracy)
   end
 
   subject(:corrector) { SpellingCorrector.new }
@@ -14,7 +15,7 @@ describe SpellingCorrector do
     end
 
     it "returns nil for unknown words" do
-      expect(corrector.known %w("ornithorhyncus")).to be_nil
+      expect(corrector.known %w(ornithorhyncus)).to be_nil
     end
   end
 
@@ -31,7 +32,7 @@ describe SpellingCorrector do
       words_hash = {
         "sheeeeep"    => "sheep",
         "peepple"     => "people",
-        "sheeple"     => "NO SUGGESTION",
+        "sheeple"     => "sheep",
         "inSIDE"      => "inside",
         "jjoobbb"     => "job",
         "weke"        => "wake",

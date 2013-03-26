@@ -11,4 +11,3 @@ get "/" do
   redirect "https://github.com/phstc/spelling-corrector"
 end
 
-
